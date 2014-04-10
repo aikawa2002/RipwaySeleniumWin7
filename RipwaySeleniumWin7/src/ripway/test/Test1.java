@@ -26,8 +26,9 @@ public class Test1 {
 
   @Before
   public void setUp() throws Exception {
-	File profileDir = new File("C:\\Users\\r3pc\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\wywyp1e9.default");
-	FirefoxProfile profile = new FirefoxProfile(profileDir);
+	//File profileDir = new File("C:\\Users\\r3pc\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\wywyp1e9.default");
+	FirefoxProfile profile = new FirefoxProfile();
+	//FirefoxProfile profile = new FirefoxProfile(profileDir);
 	profile.setPreference("browser.safebrowsing.malware.enabled", false);
     driver = new FirefoxDriver(profile);
     baseUrl = "http://r01.ripway.net/";
