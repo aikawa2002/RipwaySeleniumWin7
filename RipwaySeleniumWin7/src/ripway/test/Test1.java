@@ -45,9 +45,9 @@ public class Test1 {
 		
 		//SOCKS5
 /*		alert = driver.switchTo().alert();
-		System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
+		System.out.println(alert.getText()); //ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 
-	    alert.accept();  //alert‚âconfirm‚ÌOK‚ğ‰Ÿ‚·B
+	    alert.accept();  //alertã‚„confirmã®OKã‚’æŠ¼ã™ã€‚
 		
 	    (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
@@ -66,7 +66,7 @@ public class Test1 {
     driver.findElement(By.name("password")).clear();
     driver.findElement(By.name("password")).sendKeys("ripadm99");
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    driver.findElement(By.linkText("ƒƒOƒCƒ“ƒŠƒXƒg")).click();
+    driver.findElement(By.linkText("ãƒ­ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ")).click();
     String aaa = driver.findElement(By.cssSelector("b")).getText();
     driver.findElement(By.cssSelector("input[type=\"button\"]")).click();
   }
