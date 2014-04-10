@@ -112,4 +112,10 @@ public class Test1 {
       acceptNextAlert = true;
     }
   }
+  
+ public static void main(String args[]) {
+		   org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
+		   core.run(Test1.class);
+ }
+
 }
