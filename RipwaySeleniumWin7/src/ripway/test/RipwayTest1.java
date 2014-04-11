@@ -63,30 +63,16 @@ public class RipwayTest1 {
 		//db_url = "jdbc:mysql://10.247.6.101:3306/test?user=root&password=ripway.net&useUnicode=true&characterEncoding=UTF-8";
 		//db_url = "jdbc:mysql://10.247.3.135:3306/test?user=root&password=password&useUnicode=true&characterEncoding=UTF-8";
 		
-		//IEブラウザ
-		if (mode == 1) {
-			System.setProperty("webdriver.ie.driver", "D:\\IEDriverServer.exe");
-			driver = new InternetExplorerDriver();
-		//FireFoxブラウザ
-		} else if (mode == 2) {
-			File profileDir = new File("C:\\Documents and Settings\\Administrator\\Application Data\\Mozilla\\Firefox\\Profiles\\muxpj2gh.default");
-			FirefoxProfile profile = new FirefoxProfile(profileDir);
-			profile.setPreference("browser.safebrowsing.malware.enabled", false);
-			driver = new FirefoxDriver(profile);
-		//Chromeブラウザ
-		} else if (mode == 3) {
-			System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
-			driver = new ChromeDriver();
-		}
+		driver = new FirefoxDriver();
 		baseUrl = RipwayDefine.baseUrl;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		Class.forName(RipwayDefine.db_drv);
-		con = DriverManager.getConnection(RipwayDefine.db_url);
+		//Class.forName(RipwayDefine.db_drv);
+		//con = DriverManager.getConnection(RipwayDefine.db_url);
         //ssh = new ripway.common.SshSocks5Connection();
         site = "nec";
         Time2 = new Timestamp(System.currentTimeMillis());
-		con = getConnection();
+		//con = getConnection();
 	}
 
 	   protected Connection getConnection() throws Exception {
