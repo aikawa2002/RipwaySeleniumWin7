@@ -550,7 +550,7 @@ public class RipwayTest1 {
               driver.findElement(By.xpath(RipwayDefine.keizoku)).click();
           }
         } catch(Exception e){}
-		
+		try {
         // click | //a[3]/div | 
 		driver.findElement(By.xpath(RipwayDefine.menu_naiyou)).click();
 		Thread.sleep(2000L);
@@ -579,8 +579,15 @@ public class RipwayTest1 {
                 return bl;
             }
         });
+		} catch (Exception e) {
+ 	   		String err = e.getMessage();
+ 	   		isError("内容 質問文章失敗  ", "質問文章失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+	    	return;
+		}
 		
 //キーワード
+		try {
 		Thread.sleep(1000L);
 		driver.findElement(By.xpath("(//input[@name='queryType'])[2]")).click();
 		Thread.sleep(1000L);
@@ -622,7 +629,13 @@ public class RipwayTest1 {
                 return d.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[5]/tbody/tr[2]/td[2]/table/tbody/tr[7]/td[3]")).getText().trim().endsWith("件");
             }
         });
-
+		} catch (Exception e) {
+ 	   		String err = e.getMessage();
+ 	   		isError("内容 キーワード検索失敗  ", "キーワード検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+	    	return;
+		}
+		try {
 		Thread.sleep(1000L);
 		driver.findElement(By.xpath("(//input[@name='queryType'])[3]")).click();
 		Thread.sleep(500L);
@@ -665,6 +678,14 @@ public class RipwayTest1 {
                 return d.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[5]/tbody/tr[2]/td[2]/table/tbody/tr[5]/td/table/tbody/tr/td[3]")).getText().trim().endsWith("件");
             }
         });
+		} catch (Exception e) {
+ 	   		String err = e.getMessage();
+ 	   		isError("内容 書誌項目検索失敗  ", "書誌項目検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+	    	return;
+		}
+
+		try {
 		driver.findElement(By.xpath("(//input[@name='queryType'])[4]")).click();
 		Thread.sleep(5000L);
 
@@ -697,6 +718,13 @@ public class RipwayTest1 {
 		driver = driver.switchTo().frame("F1");
 		driver.findElement(By.linkText("ログアウト")).click();
 		driver.findElement(By.cssSelector("button.main")).click();
+		} catch (Exception e) {
+ 	   		String err = e.getMessage();
+ 	   		isError("内容 番号検索失敗  ", "番号検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+	    	return;
+		}
+
 	}
 
 	@SuppressWarnings("resource")
