@@ -55,21 +55,13 @@ public class RipwayTest1 {
 	@Before
 	public void setUp() throws Exception {
 
-		/*org.openqa.selenium.Proxy proxy = new org.openqa.selenium.Proxy();
-		proxy.setHttpProxy(RipwayDefine.PROXY)
-	     .setFtpProxy(RipwayDefine.PROXY)
-	     .setSslProxy(RipwayDefine.PROXY);
-		DesiredCapabilities cap = new DesiredCapabilities();
-		cap.setCapability(CapabilityType.PROXY, proxy);*/
 		db_drv = "com.mysql.jdbc.Driver";
 		db_url = "jdbc:mysql://10.247.6.209:3306/test?user=root&password=ripway.net&useUnicode=true&characterEncoding=UTF-8";
-		//db_url = "jdbc:mysql://10.247.6.101:3306/test?user=root&password=ripway.net&useUnicode=true&characterEncoding=UTF-8";
-		//db_url = "jdbc:mysql://10.247.3.135:3306/test?user=root&password=password&useUnicode=true&characterEncoding=UTF-8";
 		File profileDir = new File("/root/.mozilla/firefox/edt2m12g.default");
 		FirefoxProfile profile = new FirefoxProfile(profileDir);
 		profile.setPreference("browser.safebrowsing.malware.enabled", false);
 		driver = new FirefoxDriver(profile);
-		baseUrl = RipwayDefine.baseUrl;
+		baseUrl = RipwayDefine.base2Url;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		//Class.forName(RipwayDefine.db_drv);
@@ -95,18 +87,6 @@ public class RipwayTest1 {
 
 		Thread.sleep(500L);
 
-		//SOCKS5
-/*		alert = driver.switchTo().alert();
-		System.out.println(alert.getText()); //ダイアログのメッセージ
-	    alert.accept();  //alertやconfirmのOKを押す。
-		
-	    (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("Windows");
-                //return d.getTitle().toLowerCase().startsWith("ripway");
-            }
-        });
-*/		
 		try {
 		// assertTitle | RIPWAY | 
 		assertEquals("RIPWAY", driver.getTitle());
@@ -737,7 +717,7 @@ public class RipwayTest1 {
 			src = new FileInputStream(f).getChannel();
         FileChannel target = new FileOutputStream(t).getChannel();     
         src.transferTo(0, src.size(), target);
-    	mail.send(subject, mailtext,filename);
+    	mail.send(RipwayDefine.TITLE + subject, mailtext,filename);
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
