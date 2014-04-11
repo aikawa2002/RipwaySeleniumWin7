@@ -107,10 +107,10 @@ public class RipwayTest1 {
             }
         });
 */		
+		try {
 		// assertTitle | RIPWAY | 
 		assertEquals("RIPWAY", driver.getTitle());
 		// type | name=authId | 9536
-		try {
 		driver.findElement(By.name("authId")).clear();
 		driver.findElement(By.name("authId")).sendKeys("9536");
 		//driver.findElement(By.name("authId")).sendKeys("ripadm1");
@@ -141,6 +141,7 @@ public class RipwayTest1 {
         } catch(Exception e){}
 		
         // click | //a[3]/div | 
+		try {
 		driver.findElement(By.xpath(RipwayDefine.menu_shugo)).click();
 
 		// assertTitle | RIPWAY | 
@@ -151,7 +152,6 @@ public class RipwayTest1 {
 		Thread.sleep(1000L);
 		driver.findElement(By.id("qpart")).clear();
 		Thread.sleep(1000L);
-		try {
 		driver.findElement(By.id("qpart")).sendKeys("ビアラホス生産菌は、ビアラホスが自身のグルタミン合成酵素を阻害する事態に対処するためビアラホスを無毒化する酵素ホスフィノスリシン N-アセチル基転移酵素(phosphinothricin N-acetyltransferase: PAT, EC 2.3.1.183, 反応)の遺伝子barを持っている。そこでbarを植物内で発現できるように改変して導入することでビアラホス耐性作物を開発した(薬剤の分解・修飾による無毒化)。");
 		Thread.sleep(1000L);
 		driver.findElement(By.cssSelector("button[title=\"質問文章の検索条件を確認できます\"]")).click();
@@ -168,7 +168,7 @@ public class RipwayTest1 {
         });
 		} catch (Exception e) {
  	   		String err = e.getMessage();
- 	   		isError("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		isError("集合 概念検索失敗  ", "集合 概念検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
  	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
@@ -246,7 +246,7 @@ public class RipwayTest1 {
 		//assertEquals("42513", element.getText().replaceAll("件", "").trim());
 		} catch (Exception e) {
 	   		String err = e.getMessage();
-	   		isError("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+	   		isError("集合 穴埋め検索失敗  ", "穴埋め検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
  		    //ssh.sendMail("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
     	return;
 		}
@@ -295,7 +295,7 @@ public class RipwayTest1 {
 		assertEquals("RIPWAY", driver.getTitle());
 		} catch (Exception e) {
 			String err = e.getMessage();
-			isError("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+			isError("集合 コマンド検索失敗  ", "コマンド検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    //ssh.sendMail("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    return;
 		}
@@ -379,6 +379,7 @@ public class RipwayTest1 {
         driver.switchTo().window(currentWindowId);
 */        
         
+		try {
         driver = driver.switchTo().frame("F1");
 		driver.findElement(By.linkText("検索条件")).click();
         
@@ -390,7 +391,6 @@ public class RipwayTest1 {
             }
         });
 //番号検索
-		try {
 		Thread.sleep(1000L);
 		driver.findElement(By.xpath("(//input[@name='queryType'])[4]")).click();
 		Thread.sleep(5000L);
@@ -418,11 +418,11 @@ public class RipwayTest1 {
         });
 		} catch (Exception e) {
 			String err = e.getMessage();
-			isError("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+			isError("集合 番号検索失敗  ", "番号検索失敗 \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			return;
 		}
-		
+		try {
         driver = driver.switchTo().frame("F3");
 		
 		new Select(driver.findElement(By.name("showIndex"))).selectByIndex(1);
@@ -497,6 +497,12 @@ public class RipwayTest1 {
         driver = driver.switchTo().frame("F1");
 		driver.findElement(By.linkText("ログアウト")).click();
 		driver.findElement(By.cssSelector("button.main")).click();
+		} catch (Exception e) {
+			String err = e.getMessage();
+			isError("その他エラー  ", "その他エラー \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+			//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+			return;
+		}
 	}
 
 	@Test
@@ -517,6 +523,7 @@ public class RipwayTest1 {
             }
         });
 */		
+	try {
 	    // assertTitle | RIPWAY | 
 		assertEquals("RIPWAY", driver.getTitle());
 		driver.findElement(By.name("authId")).clear();
@@ -527,6 +534,12 @@ public class RipwayTest1 {
 		//driver.findElement(By.name("password")).sendKeys("ripway.net");
 		driver.findElement(By.cssSelector("button.main")).click();
 		assertEquals("RIPWAY", driver.getTitle());
+	} catch (Exception e) {
+		String err = e.getMessage();
+		isError("ログインエラー  ", "ログインエラー \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+		//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+		return;
+	}
 
 		WebElement element = null;
         //二重ログインチェック
