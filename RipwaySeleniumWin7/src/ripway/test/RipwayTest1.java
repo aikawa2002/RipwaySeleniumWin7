@@ -32,6 +32,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import ripway.common.RipwayDefine;
+import ripway.common.SendMailer;
 
 public class RipwayTest1 {
 	private WebDriver driver;
@@ -48,6 +49,7 @@ public class RipwayTest1 {
     int result = 0;
     String env = "[RICOH tomcat3]";
 	protected int[] cntval = new int[1000];
+	protected SendMailer mail = null;
 
 	@Before
 	public void setUp() throws Exception {
@@ -75,6 +77,7 @@ public class RipwayTest1 {
         site = "nec";
         Time2 = new Timestamp(System.currentTimeMillis());
 		//con = getConnection();
+        mail = new SendMailer();
 	}
 
 	   protected Connection getConnection() throws Exception {
@@ -121,7 +124,7 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
 	    	//ssh.sendMail("Ripway can not login", "Ripway can not login\n\n loginurl -->"+ baseUrl + RipwayDefine.LO + "\n\n" + err);
-	    	//ssh.sendMail(env + "ログインが出来ません。", "ログインが出来ません。\n "+err);
+	    	mail.send(env + "ログインが出来ません。", "ログインが出来ません。\n "+err);
 	    	return;
  	   	}
 
@@ -163,7 +166,8 @@ public class RipwayTest1 {
         });
 		} catch (Exception e) {
  	   		String err = e.getMessage();
- 		   //ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		mail.send("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
 
@@ -240,6 +244,7 @@ public class RipwayTest1 {
 		//assertEquals("42513", element.getText().replaceAll("件", "").trim());
 		} catch (Exception e) {
 	   		String err = e.getMessage();
+ 		    mail.send("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
  		    //ssh.sendMail("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
     	return;
 		}
@@ -288,6 +293,7 @@ public class RipwayTest1 {
 		assertEquals("RIPWAY", driver.getTitle());
 		} catch (Exception e) {
 			String err = e.getMessage();
+		    mail.send("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    //ssh.sendMail("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    return;
 		}
@@ -317,6 +323,7 @@ public class RipwayTest1 {
         }
 		} catch (Exception e) {
 			String err = e.getMessage();
+ 		    mail.send("CGI is failure  ", "CGI is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
  		    //ssh.sendMail("CGI is failure  ", "CGI is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 		    return;
 		}
@@ -408,6 +415,7 @@ public class RipwayTest1 {
         });
 		} catch (Exception e) {
 			String err = e.getMessage();
+			mail.send("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			return;
 		}
