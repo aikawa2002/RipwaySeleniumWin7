@@ -62,8 +62,10 @@ public class RipwayTest1 {
 		db_url = "jdbc:mysql://10.247.6.209:3306/test?user=root&password=ripway.net&useUnicode=true&characterEncoding=UTF-8";
 		//db_url = "jdbc:mysql://10.247.6.101:3306/test?user=root&password=ripway.net&useUnicode=true&characterEncoding=UTF-8";
 		//db_url = "jdbc:mysql://10.247.3.135:3306/test?user=root&password=password&useUnicode=true&characterEncoding=UTF-8";
-		
-		driver = new FirefoxDriver();
+		File profileDir = new File("/root/.mozilla/firefox/edt2m12g.default");
+		FirefoxProfile profile = new FirefoxProfile(profileDir);
+		profile.setPreference("browser.safebrowsing.malware.enabled", false);
+		driver = new FirefoxDriver(profile);
 		baseUrl = RipwayDefine.baseUrl;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
