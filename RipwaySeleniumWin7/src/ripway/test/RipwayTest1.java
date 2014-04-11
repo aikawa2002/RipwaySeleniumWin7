@@ -307,7 +307,8 @@ public class RipwayTest1 {
 //公報明細表示
         // 増えたウィンドウIDを取得する。
         String newWindowId = null;
-		try {
+        WebDriver newWindowDriver = null;
+        /*		try {
 		Thread.sleep(500L);
         driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr[2]/td[3]/a[2]")).click();
         // ウィンドウ表示までに時間がかかると、seleniumが先走ることがあるのでウィンドウが増えるまで待機。
@@ -348,7 +349,7 @@ public class RipwayTest1 {
         
         driver.switchTo().window(currentWindowId);
 		driver = driver.switchTo().frame(iFrame);
-		driver = driver.switchTo().frame("F3");
+*/		driver = driver.switchTo().frame("F3");
 
 //PDF表示
 /*        driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr[2]/td[3]/a/img")).click();
