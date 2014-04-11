@@ -27,7 +27,7 @@ public class SendMailer{
 		
 	}
     
-	public void send(String subject,String mailtext) throws Exception {
+	public void send(String subject,String mailtext,String fileName) throws Exception {
 	Properties props = System.getProperties();
 	//SMTPサーバーのアドレスを指定
 	props.put("mail.transport.protocol", "smtp");
@@ -65,18 +65,18 @@ public class SendMailer{
 	// メールの形式を指定(TEXT)
 	mimeMessage.setHeader("Content-Type","text/plain");
 
-/*	 添付ファイル部を設定 
+	// 添付ファイル部を設定 
 	MimeBodyPart mbp2 = new MimeBodyPart();
 	// 添付するファイル名を指定
 	FileDataSource fds = new FileDataSource(fileName);
 	mbp2.setDataHandler(new DataHandler(fds));
 	mbp2.setFileName(MimeUtility.encodeWord(fds.getName()));
-*/	// 複数のボディを格納するマルチパートオブジェクトを生成
+	// 複数のボディを格納するマルチパートオブジェクトを生成
 	Multipart mp = new MimeMultipart();
 	// 本文部分を追加
 	mp.addBodyPart(mbp1);
 	// 添付部分を追加
-	//mp.addBodyPart(mbp2);
+	mp.addBodyPart(mbp2);
 	// マルチパートオブジェクトをメッセージに設定
 	mimeMessage.setContent(mp);
 

@@ -1,10 +1,13 @@
 package ripway.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,10 +26,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -123,8 +124,9 @@ public class RipwayTest1 {
 		assertEquals("RIPWAY", driver.getTitle());
 		} catch (Exception e) {
  	   		String err = e.getMessage();
+ 	   		
 	    	//ssh.sendMail("Ripway can not login", "Ripway can not login\n\n loginurl -->"+ baseUrl + RipwayDefine.LO + "\n\n" + err);
-	    	mail.send(env + "ログインが出来ません。", "ログインが出来ません。\n "+err);
+ 	   		isError(env + "ログインが出来ません。", "ログインが出来ません。\n "+err);
 	    	return;
  	   	}
 
@@ -166,7 +168,7 @@ public class RipwayTest1 {
         });
 		} catch (Exception e) {
  	   		String err = e.getMessage();
- 	   		mail.send("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
+ 	   		isError("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
  	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
@@ -244,7 +246,7 @@ public class RipwayTest1 {
 		//assertEquals("42513", element.getText().replaceAll("件", "").trim());
 		} catch (Exception e) {
 	   		String err = e.getMessage();
- 		    mail.send("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+	   		isError("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
  		    //ssh.sendMail("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
     	return;
 		}
@@ -293,7 +295,7 @@ public class RipwayTest1 {
 		assertEquals("RIPWAY", driver.getTitle());
 		} catch (Exception e) {
 			String err = e.getMessage();
-		    mail.send("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+			isError("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    //ssh.sendMail("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    return;
 		}
@@ -416,7 +418,7 @@ public class RipwayTest1 {
         });
 		} catch (Exception e) {
 			String err = e.getMessage();
-			mail.send("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
+			isError("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			return;
 		}
@@ -684,7 +686,25 @@ public class RipwayTest1 {
 		driver.findElement(By.cssSelector("button.main")).click();
 	}
 
-	 //データベースへデータ追加
+	@SuppressWarnings("resource")
+	private void isError(String subject,String mailtext) {
+        File f = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String filename = "/tmp/" + driver.getClass().getSimpleName().toLowerCase() + System.currentTimeMillis() + ".png";
+        File t = new File(filename);
+        FileChannel src;
+		try {
+			src = new FileInputStream(f).getChannel();
+        FileChannel target = new FileOutputStream(t).getChannel();     
+        src.transferTo(0, src.size(), target);
+    	mail.send(subject, mailtext,filename);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//データベースへデータ追加
 	 protected void setData(String site,String text,int search,long timeval,int result) throws Exception {
 	     PreparedStatement prep = null;
 		 
