@@ -50,6 +50,7 @@
 		<pathelement location="${libdir}/xalan-2.7.1.jar"/>
 		<pathelement location="${libdir}/xercesImpl-2.10.0.jar"/>
 		<pathelement location="${libdir}/xml-apis-1.4.01.jar"/>
+		<pathelement location="${libdir}/mail.jar"/>
 	</path>
 	<target name="init">
 		<mkdir dir="build/classes"/>
@@ -111,6 +112,7 @@
 			<zipfileset excludes="META-INF/*.SF" src="${libdir}/xalan-2.7.1.jar"/>
 			<zipfileset excludes="META-INF/*.SF" src="${libdir}/xercesImpl-2.10.0.jar"/>
 			<zipfileset excludes="META-INF/*.SF" src="${libdir}/xml-apis-1.4.01.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/mail.jar"/>
 		</jar>
 	</target>
 </project>
