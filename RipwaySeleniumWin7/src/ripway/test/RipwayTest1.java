@@ -83,7 +83,7 @@ public class RipwayTest1 {
 		Alert alert = null;
 		
 	    // open | /v3r3ricoh/LO.jsp | 
-		driver.get(baseUrl + RipwayDefine.LO);
+		driver.get(RipwayDefine.baseUrl + RipwayDefine.LO);
 
 		Thread.sleep(500L);
 
@@ -490,7 +490,7 @@ public class RipwayTest1 {
 		Alert alert = null;
 
 		// open | /v3r3ricoh/LO.jsp | 
-		driver.get(baseUrl + RipwayDefine.LO);
+		driver.get(RipwayDefine.baseUrl + RipwayDefine.LO);
 
 		//SOCKS5
 /*		alert = driver.switchTo().alert();
