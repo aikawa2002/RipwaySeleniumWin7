@@ -69,7 +69,7 @@
 	<target depends="build" name="create_run_jar">
 		<jar destfile="build/${jarname}" filesetmanifest="mergewithoutmain">
 			<manifest>
-				<attribute name="Main-Class" value="ripway.test.Test1"/>
+				<attribute name="Main-Class" value="ripway.test.RipwayTest1"/>
 				<attribute name="Class-Path" value="."/>
 			</manifest>
 			<fileset dir="build/classes"/>

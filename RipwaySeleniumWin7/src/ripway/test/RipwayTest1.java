@@ -29,7 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import ripway.common.RipwayDefine;
 
-public class Test1 {
+public class RipwayTest1 {
 	private WebDriver driver;
 	private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -645,7 +645,7 @@ public class Test1 {
 	
 	 public static void main(String args[]) {
 		   org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
-		   core.run(Test1.class);
+		   core.run(RipwayTest1.class);
 	 }
 		
 }
