@@ -301,7 +301,7 @@ public class RipwayTest1 {
 		driver.switchTo().window(currentWindowId);
 
 		WebElement iFrame = driver.findElement(By.name("F3"));
-		driver = driver.switchTo().frame(iFrame);
+		//driver = driver.switchTo().frame(iFrame);
 		//driver = driver.switchTo().frame("F3");
         
 //公報明細表示
@@ -349,7 +349,7 @@ public class RipwayTest1 {
         
         driver.switchTo().window(currentWindowId);
 		driver = driver.switchTo().frame(iFrame);
-*/		driver = driver.switchTo().frame("F3");
+*/		//driver = driver.switchTo().frame("F3");
 
 //PDF表示
 /*        driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr[2]/td[3]/a/img")).click();
@@ -377,7 +377,7 @@ public class RipwayTest1 {
         driver.switchTo().window(currentWindowId);
 */        
         
-        driver = driver.switchTo().frame("F1");
+        //driver = driver.switchTo().frame("F1");
 		driver.findElement(By.linkText("検索条件")).click();
         
 		Thread.sleep(10000L);
