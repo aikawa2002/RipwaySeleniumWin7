@@ -77,7 +77,7 @@ public class RipwayTest1 {
         site = "nec";
         Time2 = new Timestamp(System.currentTimeMillis());
 		//con = getConnection();
-        //mail = new SendMailer();
+        mail = new SendMailer();
 	}
 
 	   protected Connection getConnection() throws Exception {
