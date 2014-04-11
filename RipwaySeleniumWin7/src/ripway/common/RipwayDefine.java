@@ -2,8 +2,10 @@ package ripway.common;
 
 
 public class RipwayDefine {
+	public static final String TITLE = "【RIPWAYサービス監視】";
 	public static final String PROXY = "proxy.ricoh.co.jp:8080"; //10.250.80.20:8080
 	public static final String baseUrl = "http://192.168.187.142/";
+	public static final String base2Url = "http://r01.ripway.net/";
 	//public static final String baseUrl = "http://10.247.3.136/";
 	public static final String LO = "v3r3ricoh/LO.jsp";
 	//public static final String LO = "ripway_gsdi/LO.jsp";
