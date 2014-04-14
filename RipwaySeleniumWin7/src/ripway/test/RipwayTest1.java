@@ -14,6 +14,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -55,8 +57,6 @@ public class RipwayTest1 {
 	@Before
 	public void setUp() throws Exception {
 
-		db_drv = "com.mysql.jdbc.Driver";
-		db_url = "jdbc:mysql://10.247.6.209:3306/test?user=root&password=ripway.net&useUnicode=true&characterEncoding=UTF-8";
 		File profileDir = new File("/root/.mozilla/firefox/edt2m12g.default");
 		FirefoxProfile profile = new FirefoxProfile(profileDir);
 		profile.setPreference("browser.safebrowsing.malware.enabled", false);
@@ -64,21 +64,12 @@ public class RipwayTest1 {
 		baseUrl = RipwayDefine.base2Url;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		//Class.forName(RipwayDefine.db_drv);
-		//con = DriverManager.getConnection(RipwayDefine.db_url);
-        //ssh = new ripway.common.SshSocks5Connection();
         site = "nec";
         Time2 = new Timestamp(System.currentTimeMillis());
-		//con = getConnection();
         mail = new SendMailer();
 	}
 
-	   protected Connection getConnection() throws Exception {
-		Class.forName(db_drv);
-		return DriverManager.getConnection(db_url);
-	   }
-
-	   @Test
+   @Test
 	public void test1() throws Exception {
 		Alert alert = null;
 		
@@ -93,11 +84,9 @@ public class RipwayTest1 {
 		// type | name=authId | 9536
 		driver.findElement(By.name("authId")).clear();
 		driver.findElement(By.name("authId")).sendKeys("9536");
-		//driver.findElement(By.name("authId")).sendKeys("ripadm1");
 		// type | name=password | ripway
 		driver.findElement(By.name("password")).clear();
 		driver.findElement(By.name("password")).sendKeys("ripway");
-		//driver.findElement(By.name("password")).sendKeys("ripway.net");
 		// click | css=button.main | 
 		driver.findElement(By.cssSelector("button.main")).click();
 		// assertTitle | RIPWAY | 
@@ -105,7 +94,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
  	   		
-	    	//ssh.sendMail("Ripway can not login", "Ripway can not login\n\n loginurl -->"+ baseUrl + RipwayDefine.LO + "\n\n" + err);
  	   		isError(env + "ログインが出来ません。", "ログインが出来ません。\n "+err);
 	    	return;
  	   	}
@@ -149,7 +137,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
  	   		isError("集合 概念検索失敗  ", "集合 概念検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
- 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
 
@@ -227,7 +214,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
 	   		String err = e.getMessage();
 	   		isError("集合 穴埋め検索失敗  ", "穴埋め検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
- 		    //ssh.sendMail("Anaume Search is failure  ", "Anaume Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
     	return;
 		}
 				
@@ -276,7 +262,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
 			String err = e.getMessage();
 			isError("集合 コマンド検索失敗  ", "コマンド検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
-		    //ssh.sendMail("Command Search is failure  ", "Command Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		    return;
 		}
         String currentWindowId = driver.getWindowHandle();
@@ -399,7 +384,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
 			String err = e.getMessage();
 			isError("集合 番号検索失敗  ", "番号検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
-			//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			return;
 		}
 		try {
@@ -480,7 +464,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
 			String err = e.getMessage();
 			isError("その他エラー  ", "その他エラーに失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
-			//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 			return;
 		}
 	}
@@ -492,17 +475,6 @@ public class RipwayTest1 {
 		// open | /v3r3ricoh/LO.jsp | 
 		driver.get(RipwayDefine.baseUrl + RipwayDefine.LO);
 
-		//SOCKS5
-/*		alert = driver.switchTo().alert();
-		System.out.println(alert.getText()); //ダイアログのメッセージ
-	    alert.accept();  //alertやconfirmのOKを押す。
-		
-	    (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("ripway");
-            }
-        });
-*/		
 	try {
 	    // assertTitle | RIPWAY | 
 		assertEquals("RIPWAY", driver.getTitle());
@@ -517,7 +489,6 @@ public class RipwayTest1 {
 	} catch (Exception e) {
 		String err = e.getMessage();
 		isError("ログインエラー  ", "ログインエラー \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
-		//ssh.sendMail("Number Search is failure  ", "Number Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO   + "\n\n" + err);
 		return;
 	}
 
@@ -562,7 +533,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
  	   		isError("内容 質問文章失敗  ", "質問文章に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
- 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
 		
@@ -612,7 +582,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
  	   		isError("内容 キーワード検索失敗  ", "キーワード検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
- 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
 		try {
@@ -661,7 +630,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
  	   		isError("内容 書誌項目検索失敗  ", "書誌項目検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
- 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
 
@@ -701,7 +669,6 @@ public class RipwayTest1 {
 		} catch (Exception e) {
  	   		String err = e.getMessage();
  	   		isError("内容 番号検索失敗  ", "番号検索に失敗しました \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
- 	   		//ssh.sendMail("Concept Search is failure  ", "Concept Search is failure \n\n loginurl -->"+ baseUrl + RipwayDefine.LO  + "\n\n" + err);
 	    	return;
 		}
 
@@ -722,6 +689,7 @@ public class RipwayTest1 {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+		System.exit(-1);
 	}
 	
 	
@@ -766,8 +734,14 @@ public class RipwayTest1 {
 	}
 	
 	 public static void main(String args[]) {
-		   org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
-		   core.run(RipwayTest1.class);
+		 if ( args.length != 1 ) {
+			 System.exit(-1);
+		 }
+		 RipwayDefine.setProperties(args[0]);
+		 
+		 org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
+		 core.run(RipwayTest1.class);
+		 System.exit(0);
 	 }
 		
 }

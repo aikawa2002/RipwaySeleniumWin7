@@ -19,9 +19,9 @@ import javax.mail.internet.MimeUtility;
 
 public class SendMailer{
 	
-	protected static String _smtp="192.168.187.128";
-	protected static String _from="root@mail.ripway.net";
-	protected static String _sender="m.aikawa@jrits.ricoh.co.jp";
+	//protected static String _smtp="192.168.187.128";
+	//protected static String _from="root@mail.ripway.net";
+	//protected static String _sender="m.aikawa@jrits.ricoh.co.jp";
 	
 	public SendMailer() {
 		
@@ -31,9 +31,9 @@ public class SendMailer{
 	Properties props = System.getProperties();
 	//SMTPサーバーのアドレスを指定
 	props.put("mail.transport.protocol", "smtp");
-	props.put("mail.smtp.host", _smtp);
-	props.put("mail.host", _smtp);
-	props.put("mail.from", _from);
+	props.put("mail.smtp.host", RipwayDefine.smtp);
+	props.put("mail.host", RipwayDefine.smtp);
+	props.put("mail.from", RipwayDefine.from);
 	props.put("mail.smtp.auth","true"); 
 
 	//メール送信用のセッション取得
@@ -42,16 +42,16 @@ public class SendMailer{
 	MimeMessage mimeMessage = new MimeMessage(session);
 
 	//送信元アドレスを設定
-	mimeMessage.setFrom(new InternetAddress(_from));
+	mimeMessage.setFrom(new InternetAddress(RipwayDefine.from));
 	// 送信先メールアドレスを指定
 	//for (int i = 0; i < addressList.size(); i++){
 	//	String address = addressList.get(i).toString();
 	//	System.out.println("■■■送信先メールアドレス[" + i + "][" + address + "]");
 	//	mimeMessage.addRecipients(Message.RecipientType.TO, address);
 	//}
-	mimeMessage.addRecipients(Message.RecipientType.TO, _sender);
+	mimeMessage.addRecipients(Message.RecipientType.TO, RipwayDefine.sender);
 	//返送先メールアドレス設定
-	InternetAddress[] address = {new InternetAddress(_from)};
+	InternetAddress[] address = {new InternetAddress(RipwayDefine.from)};
 	mimeMessage.setReplyTo(address);
 
 	// メールのタイトルを指定
@@ -86,10 +86,10 @@ public class SendMailer{
 	//送信時のSMTPコネクション確立
 	Transport transport = session.getTransport("smtp");
 	
-	System.out.println("■■■SMTPサーバ[" + _smtp + "]");
-	System.out.println("■■■メールアドレス[" + _sender + "]");
+	System.out.println("■■■SMTPサーバ[" + RipwayDefine.smtp + "]");
+	System.out.println("■■■メールアドレス[" + RipwayDefine.sender + "]");
 	System.out.println("▲▲▲SMTPサーバへ接続開始");
-	transport.connect(_smtp, "", "");
+	transport.connect(RipwayDefine.smtp, "", "");
 	System.out.println("▼▼▼SMTPサーバへ接続完了");
 
 	transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
