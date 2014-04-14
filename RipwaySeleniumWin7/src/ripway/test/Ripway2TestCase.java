@@ -118,7 +118,8 @@ public class Ripway2TestCase {
 	}
 	
 	 
-	 @Test
+	 @SuppressWarnings("deprecation")
+	@Test
 	 public void test300() throws Exception {
 		 this.re.add(Time2.toLocaleString()); int valnum = 0;
 		 try{
@@ -163,7 +164,8 @@ public class Ripway2TestCase {
 		 }
 	 }
 
-	 @Test
+	 @SuppressWarnings("deprecation")
+	@Test
 	 public void test001() throws Exception {
 	 this.re.add(Time2.toLocaleString()); 
 	 String msg = null; 
