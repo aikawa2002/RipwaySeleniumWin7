@@ -36,9 +36,6 @@ public class Ripway2TestCase {
 
 	protected int[] cntval = new int[1000];
 	protected Selenium selenium;
-	protected String filename = "D:\\aikawa\\out.txt";
-	protected String username = "ripwaytest003";
-	protected String password = "ripwaytest003";
 	protected String cgiUrl = null;
 	protected String db_drv = null;
 	protected String db_url = null;
@@ -498,7 +495,13 @@ System.out.println(alert.getText()); //ダイアログのメッセージ
 	}
 
 	public static void main(String args[]) {
+		 if ( args.length != 1 ) {
+			 System.exit(-1);
+		 }
+		 RipwayDefine.setProperties(args[0]);
+		 
 		org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
 		core.run(Ripway2TestCase.class);
+		 System.exit(0);
 	}
 }
