@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir=".." default="create_run_jar" name="ripwaySelenium">
+	<property environment="env"/>
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="1.6"/>
+	<property name="source" value="1.6"/>
+	<property name="jarname" value="Ripway2TestCase.jar"/>
+	<property name="libdir" value="libs"/>
+	<path id="libraryclasspath">
+		<pathelement location="${libdir}/apache-mime4j-0.6.jar"/>
+		<pathelement location="${libdir}/bsh-1.3.0.jar"/>
+		<pathelement location="${libdir}/cglib-nodep-2.1_3.jar"/>
+		<pathelement location="${libdir}/commons-codec-1.8.jar"/>
+		<pathelement location="${libdir}/commons-collections-3.2.1.jar"/>
+		<pathelement location="${libdir}/commons-exec-1.1.jar"/>
+		<pathelement location="${libdir}/commons-io-2.2.jar"/>
+		<pathelement location="${libdir}/commons-jxpath-1.3.jar"/>
+		<pathelement location="${libdir}/commons-lang3-3.1.jar"/>
+		<pathelement location="${libdir}/commons-logging-1.1.1.jar"/>
+		<pathelement location="${libdir}/cssparser-0.9.11.jar"/>
+		<pathelement location="${libdir}/guava-15.0.jar"/>
+		<pathelement location="${libdir}/hamcrest-core-1.3.jar"/>
+		<pathelement location="${libdir}/hamcrest-library-1.3.jar"/>
+		<pathelement location="${libdir}/htmlunit-2.13.jar"/>
+		<pathelement location="${libdir}/htmlunit-core-js-2.13.jar"/>
+		<pathelement location="${libdir}/httpclient-4.3.1.jar"/>
+		<pathelement location="${libdir}/httpcore-4.3.jar"/>
+		<pathelement location="${libdir}/httpmime-4.3.1.jar"/>
+		<pathelement location="${libdir}/ini4j-0.5.2.jar"/>
+		<pathelement location="${libdir}/jcommander-1.29.jar"/>
+		<pathelement location="${libdir}/jetty-websocket-8.1.8.jar"/>
+		<pathelement location="${libdir}/jna-3.4.0.jar"/>
+		<pathelement location="${libdir}/jna-platform-3.4.0.jar"/>
+		<pathelement location="${libdir}/json-20080701.jar"/>
+		<pathelement location="${libdir}/junit-dep-4.11.jar"/>
+		<pathelement location="${libdir}/nekohtml-1.9.19.jar"/>
+		<pathelement location="${libdir}/netty-3.5.7.Final.jar"/>
+		<pathelement location="${libdir}/operadriver-1.5.jar"/>
+		<pathelement location="${libdir}/phantomjsdriver-1.1.0.jar"/>
+		<pathelement location="${libdir}/protobuf-java-2.4.1.jar"/>
+		<pathelement location="${libdir}/sac-1.3.jar"/>
+		<pathelement location="${libdir}/selenium-java-2.41.0.jar"/>
+		<pathelement location="${libdir}/serializer-2.7.1.jar"/>
+		<pathelement location="${libdir}/testng-6.8.5.jar"/>
+		<pathelement location="${libdir}/xalan-2.7.1.jar"/>
+		<pathelement location="${libdir}/xercesImpl-2.10.0.jar"/>
+		<pathelement location="${libdir}/xml-apis-1.4.01.jar"/>
+		<pathelement location="${libdir}/mail.jar"/>
+	</path>
+	<target name="init">
+		<mkdir dir="build/classes"/>
+		<copy includeemptydirs="false" todir="build/classes">
+			<fileset dir="src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	</target>
+	<target depends="init" name="build">
+		<echo message="${ant.project.name}: ${ant.file}"/>
+		<javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" source="${source}" target="${target}">
+			<src path="src"/>
+			<classpath refid="libraryclasspath"/>
+		</javac>
+	</target>
+	<target depends="build" name="create_run_jar">
+		<jar destfile="build/${jarname}" filesetmanifest="mergewithoutmain">
+			<manifest>
+				<attribute name="Main-Class" value="ripway.test.Ripway2TestCase"/>
+				<attribute name="Class-Path" value="."/>
+			</manifest>
+			<fileset dir="build/classes"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/apache-mime4j-0.6.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/bsh-1.3.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/cglib-nodep-2.1_3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-codec-1.8.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-collections-3.2.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-exec-1.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-io-2.2.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-jxpath-1.3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-lang3-3.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/commons-logging-1.1.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/cssparser-0.9.11.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/guava-15.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/hamcrest-core-1.3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/hamcrest-library-1.3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/htmlunit-2.13.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/htmlunit-core-js-2.13.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/httpclient-4.3.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/httpcore-4.3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/httpmime-4.3.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/ini4j-0.5.2.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/jcommander-1.29.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/jetty-websocket-8.1.8.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/jna-3.4.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/jna-platform-3.4.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/json-20080701.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/junit-dep-4.11.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/nekohtml-1.9.19.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/netty-3.5.7.Final.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/operadriver-1.5.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/phantomjsdriver-1.1.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/protobuf-java-2.4.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/sac-1.3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/selenium-java-2.41.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/serializer-2.7.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/testng-6.8.5.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/xalan-2.7.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/xercesImpl-2.10.0.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/xml-apis-1.4.01.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${libdir}/mail.jar"/>
+		</jar>
+	</target>
+</project>
