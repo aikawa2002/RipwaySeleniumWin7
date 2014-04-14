@@ -88,6 +88,8 @@ public class Ripway2TestCase {
 
 		Time2 = new Timestamp(System.currentTimeMillis());
 		con = getConnection();
+		System.out.println(db_url);
+		System.out.println(baseUrl);
 		site = "RIPWAY2";
 	}
 
@@ -115,52 +117,6 @@ public class Ripway2TestCase {
 		Thread.sleep(500L);
 	}
 	
-	
-	@Ignore
-	 public void test000() throws Exception {
-
-	 this.re.add(Time2.toLocaleString()); int valnum = 0;
-	 try{
-		 login(testUrl);
-		 
-		// assertTitle | RIPWAY | 
-		//assertEquals("RIPWAY", driver.getTitle());
-		// type | name=authId | 9536
-		driver.findElement(By.name("userID")).clear();
-		driver.findElement(By.name("userID")).sendKeys("Rrg00106");
-		// type | name=password | ripway
-		driver.findElement(By.name("password")).clear();
-		driver.findElement(By.name("password")).sendKeys("ripadm99");
-		// click | css=button.main | 
-		driver.findElement(By.xpath("//input[@value='ログイン']")).click();
-
-		Thread.sleep(5000L);
-
-		WebElement element = null;
-
-		driver.findElement(By.linkText("ロック解除")).click();
-		
-	    start	 = System.currentTimeMillis(); 
-		Thread.sleep(5000L);
-
-		end =	 System.currentTimeMillis(); 
-		try {
-	        element = driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[2]/font/b"));	
-		    val =element.getText();
-	        } catch(Exception e){}
-		
-		driver.findElement(By.xpath("//input[@value='ログアウト']")).click();
-		Thread.sleep(5000L);
-	 
-	 } catch(Exception e) { 
-		 e.getStackTrace(); 
-		 result = 1; 
-     } finally { 
-	   valnum	 = Integer.parseInt(val.trim());
-	   str.append("現在のログイン数:" + val + "\r\r");
-	   setData("Rrg00106","現在のログイン数:" + val,valnum,(end - start)/1000,result); 
-     }
-	 }
 	 
 	 @Test
 	 public void test300() throws Exception {
