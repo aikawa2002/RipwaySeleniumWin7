@@ -73,15 +73,14 @@ public class Ripway2TestCase {
 	@Before
 	public void setUp() throws Exception {
 
-		// ƒvƒƒpƒeƒBƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-		// ƒeƒXƒg‘ÎÛ‚ÌƒT[ƒoURL•ƒuƒ‰ƒEƒUİ’è‚ğƒvƒƒpƒeƒB‚©‚ç“Ç‚İ‚Ş
+		// ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+		// ãƒ†ã‚¹ãƒˆå¯¾è±¡ã®ã‚µãƒ¼ãƒURLï¼†ãƒ–ãƒ©ã‚¦ã‚¶è¨­å®šã‚’ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‹ã‚‰èª­ã¿è¾¼ã‚€
 		testBrowser = "*iexplore";
 		timeout = "800000";
 		// cgiUrl = prop.getProperty("SeleniumTest.CGI");
 		db_drv = "com.mysql.jdbc.Driver";
 		db_url = RipwayDefine.db_url;
-
-		// SeleniumServer‚ğ‹N“®‚·‚éB
+		// SeleniumServerã‚’èµ·å‹•ã™ã‚‹ã€‚
 		File profileDir = new File("/root/.mozilla/firefox/edt2m12g.default");
 		FirefoxProfile profile = new FirefoxProfile(profileDir);
 		profile.setPreference("browser.safebrowsing.malware.enabled", false);
@@ -118,8 +117,54 @@ public class Ripway2TestCase {
 		
 		Thread.sleep(500L);
 	}
-
 	
+	
+	@Ignore
+	 public void test000() throws Exception {
+
+	 this.re.add(Time2.toLocaleString()); int valnum = 0;
+	 try{
+		 login(testUrl);
+		 
+		// assertTitle | RIPWAY | 
+		//assertEquals("RIPWAY", driver.getTitle());
+		// type | name=authId | 9536
+		driver.findElement(By.name("userID")).clear();
+		driver.findElement(By.name("userID")).sendKeys("Rrg00106");
+		// type | name=password | ripway
+		driver.findElement(By.name("password")).clear();
+		driver.findElement(By.name("password")).sendKeys("ripadm99");
+		// click | css=button.main | 
+		driver.findElement(By.xpath("//input[@value='ãƒ­ã‚°ã‚¤ãƒ³']")).click();
+
+		Thread.sleep(5000L);
+
+		WebElement element = null;
+
+		driver.findElement(By.linkText("ãƒ­ãƒƒã‚¯è§£é™¤")).click();
+		
+	    start	 = System.currentTimeMillis(); 
+		Thread.sleep(5000L);
+
+		end =	 System.currentTimeMillis(); 
+		try {
+	        element = driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[2]/font/b"));	
+		    val =element.getText();
+	        } catch(Exception e){}
+		
+		driver.findElement(By.xpath("//input[@value='ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ']")).click();
+		Thread.sleep(5000L);
+	 
+	 } catch(Exception e) { 
+		 e.getStackTrace(); 
+		 result = 1; 
+     } finally { 
+	   valnum	 = Integer.parseInt(val.trim());
+	   str.append("ç¾åœ¨ã®ãƒ­ã‚°ã‚¤ãƒ³æ•°:" + val + "\r\r");
+	   setData("Rrg00106","ç¾åœ¨ã®ãƒ­ã‚°ã‚¤ãƒ³æ•°:" + val,valnum,(end - start)/1000,result); 
+     }
+	 }
+	 
 	 @Test
 	 public void test300() throws Exception {
 		 this.re.add(Time2.toLocaleString()); int valnum = 0;
@@ -133,13 +178,13 @@ public class Ripway2TestCase {
 			driver.findElement(By.name("password")).clear();
 			driver.findElement(By.name("password")).sendKeys("ripadm99");
 			// click | css=button.main | 
-			driver.findElement(By.xpath("//input[@value='ƒƒOƒCƒ“']")).click();
+			driver.findElement(By.xpath("//input[@value='ãƒ­ã‚°ã‚¤ãƒ³']")).click();
 
 			Thread.sleep(5000L);
 			
 			WebElement element = null;
 
-			driver.findElement(By.linkText("ƒƒOƒCƒ“ƒŠƒXƒg")).click();
+			driver.findElement(By.linkText("ãƒ­ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ")).click();
 
 			start	 = System.currentTimeMillis(); 
 			
@@ -152,7 +197,7 @@ public class Ripway2TestCase {
 			    val =element.getText();
 		        } catch(Exception e){}
 			
-			driver.findElement(By.xpath("//input[@value='ƒƒOƒAƒEƒg']")).click();
+			driver.findElement(By.xpath("//input[@value='ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ']")).click();
 			Thread.sleep(5000L);
 
 		 } catch(Exception e) { 
@@ -160,8 +205,8 @@ public class Ripway2TestCase {
 			 result = 1; 
 	     } finally { 
 		   valnum	 = Integer.parseInt(val.trim());
-		   str.append("Œ»İ‚ÌƒƒOƒCƒ“”:" + val + "\r\r");
-		   setData("ripadmv3","Œ»İ‚ÌƒƒOƒCƒ“”:" + val,valnum,(end - start)/1000,result);
+		   str.append("ç¾åœ¨ã®ãƒ­ã‚°ã‚¤ãƒ³æ•°:" + val + "\r\r");
+		   setData("ripadmv3","ç¾åœ¨ã®ãƒ­ã‚°ã‚¤ãƒ³æ•°:" + val,valnum,(end - start)/1000,result);
 		 }
 	 }
 
@@ -186,19 +231,19 @@ public class Ripway2TestCase {
 	driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[5]/tbody/tr/td/button")).click();
 
 	Thread.sleep(5000L);
-    //“ñdƒƒOƒCƒ“ƒ`ƒFƒbƒN
+    //äºŒé‡ãƒ­ã‚°ã‚¤ãƒ³ãƒã‚§ãƒƒã‚¯
 	try {
     element = driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[3]/tbody/tr/td[2]"));	
     System.out.println(element.getText());
-      if (element.getText().startsWith("“ñdƒƒOƒCƒ“Šm”F")) {
+      if (element.getText().startsWith("äºŒé‡ãƒ­ã‚°ã‚¤ãƒ³ç¢ºèª")) {
           driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[5]/tbody/tr/td/button")).click();
       }
     } catch(Exception e){}
 
-	 driver.findElement(By.linkText("ÄŠJ")).click();
+	 driver.findElement(By.linkText("å†é–‹")).click();
 	 Thread.sleep(5000L);
 	 
-	 driver.findElement(By.xpath("//input[@value='Œ”Šm”F']")).click();
+	 driver.findElement(By.xpath("//input[@value='ä»¶æ•°ç¢ºèª']")).click();
 
 	 start =	 System.currentTimeMillis(); 
 
@@ -233,7 +278,7 @@ public class Ripway2TestCase {
 
     val=element.getText();
     
-	 driver.findElement(By.linkText("ŒŸõÀs")).click();
+	 driver.findElement(By.linkText("æ¤œç´¢å®Ÿè¡Œ")).click();
 	(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
            public Boolean apply(WebDriver d) {
            	WebElement element = d.findElement(By.name("F1"));
@@ -244,7 +289,7 @@ public class Ripway2TestCase {
      });
 
 	 driver = driver.switchTo().frame("F1");
-	 driver.findElement(By.linkText("ŒŸõğŒ")).click();
+	 driver.findElement(By.linkText("æ¤œç´¢æ¡ä»¶")).click();
 
     (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
           public Boolean apply(WebDriver d) {
@@ -252,12 +297,12 @@ public class Ripway2TestCase {
           }
       });
     
-	 driver.findElement(By.linkText("V‹K’²¸")).click();
+	 driver.findElement(By.linkText("æ–°è¦èª¿æŸ»")).click();
 	Alert alert = null;
 
 	 alert = driver.switchTo().alert();
-System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
-     alert.accept();  //alert‚âconfirm‚ÌOK‚ğ‰Ÿ‚·B
+System.out.println(alert.getText()); //ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+     alert.accept();  //alertã‚„confirmã®OKã‚’æŠ¼ã™ã€‚
 	
 	Thread.sleep(5000L);
 
@@ -266,22 +311,22 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
             return d.getTitle().toLowerCase().startsWith("ripway");
         }
     });
-	 //assertEquals("Œ»İ‚ÌŒŸõğŒEŒ‹‰Ê‚Í¸‚í‚ê‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H",
+	 //assertEquals("ç¾åœ¨ã®æ¤œç´¢æ¡ä»¶ãƒ»çµæœã¯å¤±ã‚ã‚Œã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ",
 	 //selenium.getConfirmation()); 
 	 } catch(Exception e) { 
 		 e.getStackTrace();
 	     result = 1; 
 	 } finally { 
-		 valnum = Integer.parseInt(val.replaceAll("Œ",	 "").trim());
+		 valnum = Integer.parseInt(val.replaceAll("ä»¶",	 "").trim());
 		 //assertTrue(valnum >= prevalnum); 
 		 if (valnum < prevalnum) {
-	     msg = "Œ”‚ªŒ¸­‚µ‚Ä‚¢‚Ü‚·B";
+	     msg = "ä»¶æ•°ãŒæ¸›å°‘ã—ã¦ã„ã¾ã™ã€‚";
 	     result = 1; 
 	     } else { 
-		 msg = "JPŒ”Šm”F:" +val; 
+		 msg = "JPä»¶æ•°ç¢ºèª:" +val; 
 		 }
 	 
-	 str.append(msg + "  " +val + "@‘O‰ñŒ”:" + String.valueOf(prevalnum) +"Œ\r"); 
+	 str.append(msg + "  " +val + "ã€€å‰å›ä»¶æ•°:" + String.valueOf(prevalnum) +"ä»¶\r"); 
 	 setData("ripadm",msg,valnum,(end - start)/1000,result); 
 	 }
 	 val=null;
@@ -296,7 +341,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 	 driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[5]/tbody/tr/td[2]/table/tbody/tr/td[2]/input")).click();
 	 Thread.sleep(5000L);
 	 
-	 driver.findElement(By.xpath("//input[@value='Œ”Šm”F']")).click();
+	 driver.findElement(By.xpath("//input[@value='ä»¶æ•°ç¢ºèª']")).click();
 
 	 start = System.currentTimeMillis(); 
 	 
@@ -312,7 +357,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
      element = driver.findElement(By.xpath("/html/body/form/table/tbody/tr/td/center/table[6]/tbody/tr[5]/td[2]/table/tbody/tr[3]/td/div/center/table/tbody/tr[2]/td[4]"));
      val=element.getText();
 
-	 driver.findElement(By.linkText("ŒŸõÀs")).click();
+	 driver.findElement(By.linkText("æ¤œç´¢å®Ÿè¡Œ")).click();
 	(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
            public Boolean apply(WebDriver d) {
            	WebElement element = d.findElement(By.name("F1"));
@@ -322,7 +367,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
            }
      });
 
-	 driver.findElement(By.linkText("ŒŸõğŒ")).click();
+	 driver.findElement(By.linkText("æ¤œç´¢æ¡ä»¶")).click();
 
     (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
           public Boolean apply(WebDriver d) {
@@ -330,7 +375,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
           }
       });
 
-	 driver.findElement(By.linkText("ƒƒOƒAƒEƒg")).click();
+	 driver.findElement(By.linkText("ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ")).click();
 
 	 (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
 	       public Boolean apply(WebDriver d) {
@@ -343,15 +388,15 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 	 } catch(Exception e) {
 	 e.getStackTrace(); result = 1; 
 	 } finally { 
-		 valnum =	 Integer.parseInt(val.replaceAll("Œ", "").trim());
+		 valnum =	 Integer.parseInt(val.replaceAll("ä»¶", "").trim());
 		 //assertTrue(valnum >=	 prevalnum);
 		 if (valnum < prevalnum) {
-			 msg = "Œ”‚ªŒ¸­‚µ‚Ä‚¢‚Ü‚·B";
+			 msg = "ä»¶æ•°ãŒæ¸›å°‘ã—ã¦ã„ã¾ã™ã€‚";
 			 result = 1; 
 		} else { 
-			msg = "USŒ”Šm”F:" +val;
+			msg = "USä»¶æ•°ç¢ºèª:" +val;
 		}
-		 str.append(msg + "  " +val + "@‘O‰ñŒ”:" + String.valueOf(prevalnum) +"Œ\r\r");		 
+		 str.append(msg + "  " +val + "ã€€å‰å›ä»¶æ•°:" + String.valueOf(prevalnum) +"ä»¶\r\r");		 
 		 setData("ripadm_US",msg,valnum,(end - start)/1000,result); 
 		} 
 	 }
@@ -359,9 +404,8 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 	 public void test002() throws Exception {
 	 selenium.keyDownNative(String.valueOf(KeyEvent.VK_ENTER)); 
 	 String msg = null; 
-	 //CGIŠm”F
-	 try{selenium.openWindow("http://192.168.0.104/cgi-bin/D2.cgi?JPT=A&URI=99354442&FMT=null&service=NONE"
-	 , "cgi"); 
+	 //CGIç¢ºèª
+	 try{selenium.openWindow("http://192.168.0.104/cgi-bin/D2.cgi?JPT=A&URI=99354442&FMT=null&service=NONE", "cgi"); 
 	 long start = System.currentTimeMillis();
 	 //selenium.waitForPageToLoad(timeout); 
 	 selenium.waitForPopUp("cgi", timeout);
@@ -369,15 +413,15 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 	 long end =	 System.currentTimeMillis();
 	 
 	 //selenium.selectFrame("frame_menu");
-	 //selenium.click("link=‘");
+	 //selenium.click("link=æ›¸èªŒ");
 	 
-	 //if (selenium.isTextPresent("“ÁŠJ•½‚P‚P]‚R‚T‚S‚S‚S‚Q")){
-	     str.append("CGI‚Í³í‚Å‚·B\r");
-	     msg = "CGI‚Í³í‚Å‚·B";
-	//	 selenium.click("link=‚±‚Ì•Å‚ğ•Â‚¶‚é");
+	 //if (selenium.isTextPresent("ç‰¹é–‹å¹³ï¼‘ï¼‘â€ï¼“ï¼•ï¼”ï¼”ï¼”ï¼’")){
+	     str.append("CGIã¯æ­£å¸¸ã§ã™ã€‚\r");
+	     msg = "CGIã¯æ­£å¸¸ã§ã™ã€‚";
+	//	 selenium.click("link=ã“ã®é ã‚’é–‰ã˜ã‚‹");
 	 //} else {
-      //   str.append("CGI‚Í•s³‚Å‚·B\r");
-	  //   msg = "CGI‚Í•s³‚Å‚·B";
+      //   str.append("CGIã¯ä¸æ­£ã§ã™ã€‚\r");
+	  //   msg = "CGIã¯ä¸æ­£ã§ã™ã€‚";
 	// }
      /* selenium.keyDownNative(String.valueOf(KeyEvent.VK_CONTROL)); // Stands
                                                                  // for
@@ -390,12 +434,12 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 	 */
 	     //setData("ripadm_CGI",msg,0,(end - start)/1000,0);
 	 } catch(Exception e) { 
-		 setData("ripadm_CGI","CGI‚ªŠJ‚«‚Ü‚¹‚ñ‚Å‚µ‚½B",0,(end - start)/1000,1); 
-		 str.append("CGI‚ªŠJ‚«‚Ü‚¹‚ñ‚Å‚µ‚½B\r");
+		 setData("ripadm_CGI","CGIãŒé–‹ãã¾ã›ã‚“ã§ã—ãŸã€‚",0,(end - start)/1000,1); 
+		 str.append("CGIãŒé–‹ãã¾ã›ã‚“ã§ã—ãŸã€‚\r");
 	 }
 	 } 
 	 
-	// ƒf[ƒ^ƒx[ƒX‚Öƒf[ƒ^’Ç‰Á
+	// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã¸ãƒ‡ãƒ¼ã‚¿è¿½åŠ 
 	protected void setData(String site, String text, int search, long timeval,
 			int result) throws Exception {
 		
@@ -419,7 +463,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 		}
 	}
 
-	// ƒf[ƒ^ƒx[ƒX‚©‚ç’l‚ğæ“¾
+	// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‹ã‚‰å€¤ã‚’å–å¾—
 	protected int getData(String site) throws Exception {
 		PreparedStatement prep = null;
 		int ser = 0;
@@ -428,7 +472,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 			prep.setString(1, site);
 			ResultSet rset = prep.executeQuery();
 			while (rset.next()) {
-				// —ñ”Ô†‚É‚æ‚éw’è
+				// åˆ—ç•ªå·ã«ã‚ˆã‚‹æŒ‡å®š
 				ser = rset.getInt(1);
 			}
 			rset.close();
@@ -454,13 +498,7 @@ System.out.println(alert.getText()); //ƒ_ƒCƒAƒƒO‚ÌƒƒbƒZ[ƒW
 	}
 
 	public static void main(String args[]) {
-		if ( args.length != 1 ) {
-		 System.exit(-1);
-		}
-		RipwayDefine.setProperties(args[0]);
-		 
 		org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
 		core.run(Ripway2TestCase.class);
-		 System.exit(0);
 	}
 }
