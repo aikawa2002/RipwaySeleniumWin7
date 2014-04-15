@@ -87,7 +87,7 @@ public class Ripway2TestCase {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		Time2 = new Timestamp(System.currentTimeMillis());
-		con = getConnection();
+	//con = getConnection();
 		System.out.println(db_url);
 		System.out.println(baseUrl);
 		site = "RIPWAY2";
@@ -397,8 +397,8 @@ System.out.println(alert.getText()); //ダイアログのメッセージ
 	// データベースへデータ追加
 	protected void setData(String site, String text, int search, long timeval,
 			int result) throws Exception {
-		
-		PreparedStatement prep = null;
+		return;
+/*		PreparedStatement prep = null;
 
 		try {
 			prep = con.prepareStatement(sql);
@@ -416,7 +416,7 @@ System.out.println(alert.getText()); //ダイアログのメッセージ
 			if (prep != null)
 				prep.close();
 		}
-	}
+*/	}
 
 	// データベースから値を取得
 	protected int getData(String site) throws Exception {
