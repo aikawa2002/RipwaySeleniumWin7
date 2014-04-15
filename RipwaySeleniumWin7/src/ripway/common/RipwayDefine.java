@@ -1,5 +1,11 @@
 package ripway.common;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 
@@ -27,15 +33,20 @@ public class RipwayDefine {
 	protected static String from= null;
 	protected static String sender= null;
 	
-	public static void setProperties(String propName) {
-		 ResourceBundle rb = ResourceBundle.getBundle(propName);
-		 RipwayDefine.PROXY = rb.getString("PROXY");
-		 RipwayDefine.baseUrl = rb.getString("baseUrl");
-		 RipwayDefine.base2Url = rb.getString("base2Url");
-		 RipwayDefine.smtp = rb.getString("smtp");
-		 RipwayDefine.from = rb.getString("from");
-		 RipwayDefine.sender = rb.getString("sender");
-		 RipwayDefine.db_url = rb.getString("db_url");
+	public static void setProperties(String propName) throws Exception {
+		final Properties rb = new Properties();
+        InputStream inStream = null;
+        inStream = new BufferedInputStream(new FileInputStream(propName));
+        rb.load(inStream);
+        
+        //ResourceBundle rb = ResourceBundle.getBundle(propName);
+		 RipwayDefine.PROXY = rb.getProperty("PROXY");
+		 RipwayDefine.baseUrl = rb.getProperty("baseUrl");
+		 RipwayDefine.base2Url = rb.getProperty("base2Url");
+		 RipwayDefine.smtp = rb.getProperty("smtp");
+		 RipwayDefine.from = rb.getProperty("from");
+		 RipwayDefine.sender = rb.getProperty("sender");
+		 RipwayDefine.db_url = rb.getProperty("db_url");
 	}
 
 }

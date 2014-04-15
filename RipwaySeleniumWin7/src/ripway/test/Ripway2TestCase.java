@@ -468,6 +468,7 @@ System.out.println(alert.getText()); //ダイアログのメッセージ
 		 System.exit(0);
 		} catch(Exception e) {
 			e.printStackTrace();
+			 System.exit(-1);
 		}
 	}
 }

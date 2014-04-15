@@ -737,11 +737,16 @@ public class RipwayTest1 {
 		 if ( args.length != 1 ) {
 			 System.exit(-1);
 		 }
+		try {
 		 RipwayDefine.setProperties(args[0]);
 		 
 		 org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
 		 core.run(RipwayTest1.class);
 		 System.exit(0);
+		} catch(Exception e) {
+			e.printStackTrace();
+			 System.exit(-1);
+		}
 	 }
 		
 }
