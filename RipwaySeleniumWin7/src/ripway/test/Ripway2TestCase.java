@@ -104,8 +104,13 @@ public class Ripway2TestCase {
 	}
 
 	protected Connection getConnection() throws Exception {
+		try {
 		Class.forName(getDb_drv());
 		return DriverManager.getConnection(getDb_url());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	private void login(String url) throws InterruptedException {
@@ -455,10 +460,14 @@ System.out.println(alert.getText()); //ダイアログのメッセージ
 		 if ( args.length != 1 ) {
 			 System.exit(-1);
 		 }
-		 RipwayDefine.setProperties(args[0]);
+		try {
+		RipwayDefine.setProperties(args[0]);
 		 
 		org.junit.runner.JUnitCore core = new org.junit.runner.JUnitCore();
 		core.run(Ripway2TestCase.class);
 		 System.exit(0);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
