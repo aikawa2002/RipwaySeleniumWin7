@@ -16,9 +16,20 @@ import org.apache.http.util.EntityUtils;
 public class ZabbixApi {
 	 protected String url;
 	 protected String authId;
+	 protected String user;
+	 protected String password;
 	 
-	  public ZabbixApi(String url){
+	 
+	  public ZabbixApi(String url, String user, String password){
 	    this.url = url;
+	    this.user = user;
+	    this.password = password;
+	    try {
+			auth(user, password);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	  }
 
 	  public void auth(String user, String password) throws Exception{
@@ -32,7 +43,7 @@ public class ZabbixApi {
 	    zabbixDto.setMethod("user.login");
 	    zabbixDto.setId(1);
 	    ZabbixDto response = callApi(zabbixDto);
-	    authId = response.getResult();
+	    this.authId = response.getResult();
 	    System.out.println("AuthID= " + authId);
 	  }
 

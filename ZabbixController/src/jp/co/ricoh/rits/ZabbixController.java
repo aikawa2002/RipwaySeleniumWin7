@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import jp.co.ricoh.rits.zabbix.ZabbixApi;
+import jp.co.ricoh.rits.zabbix.ZabbixHostApi;
 
 public class ZabbixController {
 	  public static void main(String[] args) {
@@ -31,11 +31,11 @@ public class ZabbixController {
 			String zabbixUser = rb.getProperty("ZABBIX_USER");
 			String zabbixPassword = rb.getProperty("ZABBIX_PASSWORD");
 			System.out.println(zabbixAddress + ":" + zabbixUser + ":" + zabbixPassword);
-		    ZabbixApi zabbixApi = new ZabbixApi("http://" + zabbixAddress + "/zabbix/api_jsonrpc.php");
+			ZabbixHostApi zabbixHostApi = new ZabbixHostApi("http://" + zabbixAddress + "/zabbix/api_jsonrpc.php", zabbixUser, zabbixPassword);
 
 		    try {
 		      //ホスト情報取得
-		      String result = zabbixApi.getHost(zabbixUser, zabbixPassword,1);
+		      String result = zabbixHostApi.get(1);
 		      System.out.println(result);
 
 		      //テンプレート作成

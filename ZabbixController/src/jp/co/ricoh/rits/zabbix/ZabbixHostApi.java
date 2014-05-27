@@ -6,13 +6,13 @@ import jp.co.ricoh.rits.dto.ZabbixDto;
 
 public class ZabbixHostApi extends ZabbixApi {
 	 
-	  public ZabbixHostApi(String url){
-		  super(url);
-	  }
+	  public ZabbixHostApi(String url, String user, String password) {
+		super(url, user, password);
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
 
-	  public String getHost(String user, String password,long id) throws Exception{
-		if (authId == null )auth(user,password);
-	    ZabbixDto zabbixDto = new ZabbixDto();
+	public String get(long id) throws Exception{
+		ZabbixDto zabbixDto = new ZabbixDto();
 	    HashMap<String,String> map = new HashMap<String,String>();
 
 	    zabbixDto.setAuth(authId);
@@ -24,18 +24,38 @@ public class ZabbixHostApi extends ZabbixApi {
 	    return response(zabbixDto);
 	  }
 	  
-	  public String createTemplate(String user, String password) throws Exception{
-		if (authId == null )auth(user,password);
+	  public String create(long id) throws Exception{
 	    ZabbixDto zabbixDto = new ZabbixDto();
 	    HashMap<String,String> map = new HashMap<String,String>();
 
 	    zabbixDto.setAuth(authId);
-	    zabbixDto.setMethod("template.create");
-        map.put("user", user);
-	    map.put("password", password);
+	    zabbixDto.setMethod("host.create");
+        map.put("host", user);
+	    map.put("interfaces", password);
+	    map.put("groups", null);
+	    map.put("templates", null);
+	    map.put("inventory", null);
+	    zabbixDto.setId(id);
 	    zabbixDto.setParams(map);
 	    return response(zabbixDto);
-
+	    
 	  }
 	  
+
+	  public String exists(long id) throws Exception{
+	    ZabbixDto zabbixDto = new ZabbixDto();
+	    HashMap<String,String> map = new HashMap<String,String>();
+
+	    zabbixDto.setAuth(authId);
+	    zabbixDto.setMethod("host.exists");
+        map.put("hostid", null);
+	    map.put("host", null);
+	    map.put("name", null);
+	    map.put("node", null);
+	    map.put("nodeids", null);
+	    zabbixDto.setId(id);
+	    zabbixDto.setParams(map);
+	    return response(zabbixDto);
+	  }
+	  	  
 }
