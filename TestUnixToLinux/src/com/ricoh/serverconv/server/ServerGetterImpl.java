@@ -81,6 +81,7 @@ public class ServerGetterImpl implements ServerGetterInterface {
 	        configMap.put("telnet_pass", ServerConvProperties.getProperties(name + "_telnet_pass"));
 	        configMap.put("prepare", ServerConvProperties.getProperties(name + "_prepare"));
 	        configMap.put("localdir", ServerConvProperties.getProperties(name + "_localdir"));
+	        configMap.put("service", ServerConvProperties.getProperties(name + "_service"));
 	        
 	    } catch (MissingResourceException e) {
 	        e.printStackTrace();

@@ -25,6 +25,11 @@ public class EnvPrePareImpl extends HttpdGetterImpl {
 		  for (String install:inst) {
 			  getConfig(session, null, ServerConvProperties.YUM_INSTALL.replaceAll("@@@", install));
 		  }
+		  String services = configMap.get("service");
+		  String[] serv = services.split(",");
+		  for (String service:serv) {
+			  getConfig(session, null, ServerConvProperties.SERVICE_ON.replaceAll("@@@", service));
+		  }
 		   
 		} catch (JSchException e) {
 			// TODO 自動生成された catch ブロック

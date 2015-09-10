@@ -232,13 +232,17 @@ public class SendMailGetterImpl extends HttpdGetterImpl {
 			if (node == null) continue;
 			boolean flg = true;
 			if (modules[i].equals("aliases")) {
-				flg = super.execConv(session, oconv, node, "/etc/mail/" + modules_value[i]);
+				flg = super.execConv(session, oconv, node, "/etc/" + modules_value[i]);
 			} else {
 				flg = execConv(session, oconv, node, "/etc/mail/" + modules_value[i]);
 			}
 			if (!flg) {
 		    	try {
-					setFile(session, "/etc/mail/", modules_value[i], ocom.getConfigMap("localdir"));
+					if (modules[i].equals("aliases")) {
+						setFile(session, "/etc/", modules_value[i], ocom.getConfigMap("localdir"));
+					} else {
+						setFile(session, "/etc/mail/", modules_value[i], ocom.getConfigMap("localdir"));
+					}
 				} catch (Exception e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
@@ -268,6 +272,7 @@ public class SendMailGetterImpl extends HttpdGetterImpl {
 		System.out.println(session.getHost() + ":" + com);
 	    try {
 			getConfig(session, null, com);
+			if (file.indexOf("aliases") > -1)  getConfig(session, null, "newaliases");
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

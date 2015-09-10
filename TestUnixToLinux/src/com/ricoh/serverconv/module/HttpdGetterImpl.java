@@ -253,7 +253,11 @@ public class HttpdGetterImpl implements CommandGetterInterface {
 	  }
 	      
 	protected synchronized ConfigNode getConfig(Session session, ConfigParserInterface parser, String command) throws Exception {
-	      if (parser != null && configMap.get("telnet_server").trim().length() > 0) return getConfigViaServer(session, parser, command);
+	      if (configMap.get("telnet_server").trim().length() > 0) {
+	    	 if (parser != null || (parser == null && !configMap.get("telnet_server").trim().startsWith("192.168.242."))) {
+	    		 return getConfigViaServer(session, parser, command);
+	    	 }
+	      }
 	      if (parser != null && configMap.get("sudo_pass").trim().length() > 0) return getConfigViaSu(session, parser, command);
 	      
 	      Channel channel = null;
@@ -342,11 +346,17 @@ public class HttpdGetterImpl implements CommandGetterInterface {
 		  //channel.setOutputStream( System.out); 
 
 	      List<String> commands = new ArrayList<String>();
-	      commands.add("telnet " + configMap.get("telnet_server"));
-	      commands.add(configMap.get("telnet_user"));
+	      if (parser != null) {
+	    	  commands.add("telnet " + configMap.get("telnet_server"));
+		      commands.add(configMap.get("telnet_user"));
+	      } else {
+	    	  commands.add("ssh " + configMap.get("telnet_server"));
+	      }
 	      commands.add(configMap.get("telnet_pass"));
-	      commands.add("su -");
-	      commands.add(configMap.get("sudo_pass"));
+	      if (!configMap.get("telnet_user").equals("root")) {
+		      commands.add("su -");
+		      commands.add(configMap.get("sudo_pass"));
+	      }
 	      
 	      //((ChannelExec)channel).setErrStream(System.err);
 	      
@@ -367,7 +377,10 @@ public class HttpdGetterImpl implements CommandGetterInterface {
 	      Thread.sleep(wait_time);
 	      
 	      InputStream in = getConfigInputStream(tmpfile,5);
-		  ConfigNode config = parser.parse(in);
+	      ConfigNode config = null;
+	      if (parser != null) {
+	    	  config = parser.parse(in);
+	      }
 	      channel.disconnect();
 	      
 	      return config;

@@ -22,6 +22,7 @@ public class ServerConvProperties {
 	public static final String HOME_CHANGE_DIR =  "useradd -D -b /export/home";
 	public static final String CHAR_CHANGE =  "sed -i -e 's/en_US.UTF-8/ja_JP.eucJP/g' /etc/sysconfig/i18n";
 	public static final String YUM_INSTALL = "yum -y install @@@";
+	public static final String SERVICE_ON = "chkconfig @@@ on";
 	//NetWorkGetterImpl
 	public static final String SSH_DIR = "/etc/ssh/";
 	public static final String CF_COMMAND = "cat " + SSH_DIR + "sshd_config";
@@ -65,11 +66,12 @@ public class ServerConvProperties {
 	public static final  String INSTALLCMD = "sudo -u oracle /export/home/oracle/client/runInstaller -silent -responseFile /export/home/oracle/client_install.rsp  &> /dev/null";
     
     
-	public static final String[] servers = {"mars","venus","news","vagrant"};
-	//public static final String[] servers = {"mars", "venus","news", "vagrant", "centos65"};
+	public static final String[] servers = {"news", "centos65"};
+//	public static final String[] servers = {"mars", "venus","news", "vagrant", "centos65"};
 	
 	public static  final Map<String, String> converMap =new HashMap<String, String>(){{ 
-		put("mars","vagrant");
+//		put("mars","vagrant");
+		put("news","centos65");
 	}};
 	
 	public static final List<String> moduleList =new ArrayList<String>(){{ 
@@ -93,7 +95,7 @@ public class ServerConvProperties {
 		add(new String[] {"dir","ssh_dir"});
 		add(new String[] {"dir","auth"});
 		add(new String[] {"user","auth"});
-		add(new String[] {"user","cron"});
+//		add(new String[] {"user","cron"});
 		add(new String[] {"user","bash"});
 		add(new String[] {"user","csh"});
 		add(new String[] {"dir","csh"});
